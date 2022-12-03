@@ -1,5 +1,6 @@
 ---
-title: "function-demo"
+title: "`BayesPF` Package Tutorial"
+date: "Dec. 3, 2022"
 output: rmarkdown::html_vignette
 vignette: >
   %\VignetteIndexEntry{function-demo}
@@ -15,5 +16,60 @@ knitr::opts_chunk$set(
 ```
 
 ```{r setup}
+#Load the package
 library(BayesPF)
+```
+
+## Generating the data using `sim_data()`
+```{r 1}
+x_noise = 0.4
+x_relation = 1.2
+tempdata = sim_data(50,x_noise,x_relation)
+
+tempdata
+tempdata$x
+tempdata$y
+```
+
+## Using `particleFilter()` to de-noise the observations y
+```{r 2}
+temp2 = sim_data(50,0.4,1.2)
+x_true = temp2$x
+obs = temp2$y
+estimates_means = particleFilter(x_true,obs,1000)
+plot(x =1:50,y=estimates_means,type="l",col="red")
+lines(obs,col="blue")
+```
+
+
+## Performance of `particleFilter()` vs. `pfilter()`
+```{r n}
+# For accuracy
+library(pomp)
+temp = gompertz()
+data1= as(temp,"data.frame")
+estimates_means = particleFilter(data1[,3],data1[,2],1000)
+plot(x =data1[,1],y=estimates_means,type="l",col="red")
+lines(data1[,2],col="blue")
+pf <- pfilter(temp,Np=1000,filter.mean=TRUE)
+fm <- filter.mean(pf)
+lines(as.vector(fm),col="black")
+
+
+# For efficiency
+library(microbenchmark)
+microbenchmark(
+  particleFilter(data1[,3],data1[,2],1000),
+  pfilter(temp,Np=1000,filter.mean=TRUE)
+)
+```
+
+## An example of `particleFilterPredict()`
+```{r n2}
+set.seed(241)
+temp = sim_data(50,0.4,1.2)
+
+particleFilterPredict(temp$x,temp$y,100,filter = TRUE)
+particleFilterPredict(temp$x,temp$y,100,filter = FALSE)
+
 ```

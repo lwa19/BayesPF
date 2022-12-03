@@ -2,8 +2,7 @@
 % Please edit documentation in R/particleFilter.R
 \name{particleFilter}
 \alias{particleFilter}
-\title{The particle filter
-(The sequential Monte Carlo with multinomial importance resampling (SIR))}
+\title{The particle filter}
 \usage{
 particleFilter(x, y, nParticle)
 }
@@ -18,12 +17,12 @@ particleFilter(x, y, nParticle)
 The de-noised observations
 }
 \description{
-The particle filter
-(The sequential Monte Carlo with multinomial importance resampling (SIR))
+The sequential Monte Carlo with multinomial importance resampling (SIR)
 }
 \examples{
-x_true = sim_data(50,0.4,1.2)$x
-obs = sim_data(50,0.4,1.2)$y
+temp = sim_data(50,0.4,1.2)
+x_true = temp$x
+obs = temp$y
 estimates_means = particleFilter(x_true,obs,1000)
 plot(x =1:50,y=estimates_means,type="l",col="red")
 lines(obs,col="blue")

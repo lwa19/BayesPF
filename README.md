@@ -40,10 +40,11 @@ tempdata$y
 
 Using the particle filter to de-noise the observations y;
 ```
-temp = sim_data(50,0.4,1.2)
-
-particleFilter.Predcit(temp$x,temp$y,100,filter = TRUE)
-particleFilter.Predcit(temp$x,temp$y,100,filter = FALSE)
+x_true = sim_data(50,0.4,1.2)$x
+obs = sim_data(50,0.4,1.2)$y
+estimates_means = particleFilter(x_true,obs,1000)
+plot(x =1:50,y=estimates_means,type="l",col="red")
+lines(obs,col="blue")
 ```
 
 
@@ -75,8 +76,8 @@ Predicting the results based on time series analysis;
 set.seed(23102)
 temp = sim_data(50,0.4,1.2)
 
-particleFilterPredcit(temp$x,temp$y,100,filter = TRUE)
-particleFilterPredcit(temp$x,temp$y,100,filter = FALSE)
+particleFilterPredict(temp$x,temp$y,100,filter = TRUE)
+particleFilterPredict(temp$x,temp$y,100,filter = FALSE)
 ```
 
 More specific examples can be viewed at `browseVignettes("BayesPF")`.

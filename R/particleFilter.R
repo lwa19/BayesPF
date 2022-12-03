@@ -1,13 +1,16 @@
 #' The particle filter
-#' (The sequential Monte Carlo with multinomial importance resampling (SIR))
+#'
+#' @description
+#' The sequential Monte Carlo with multinomial importance resampling (SIR)
 #'
 #' @param x The hidden state variables
 #' @param y The observation variables
 #' @param nParticle The number of particles simulated
 #' @return The de-noised observations
 #' @examples
-#' x_true = sim_data(50,0.4,1.2)$x
-#' obs = sim_data(50,0.4,1.2)$y
+#' temp = sim_data(50,0.4,1.2)
+#' x_true = temp$x
+#' obs = temp$y
 #' estimates_means = particleFilter(x_true,obs,1000)
 #' plot(x =1:50,y=estimates_means,type="l",col="red")
 #' lines(obs,col="blue")
