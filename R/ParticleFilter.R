@@ -1,49 +1,40 @@
-#' Run the naive particle filter
+#' The particle filter
+#' (The sequential Monte Carlo with multinomial importance resampling (SIR))
 #'
-#' @param x Distribution of random variable (fix to be more specific)
-#' @param y Observed data
-#' @param n Number of particles simulated
-#' @return De-noised observations
+#' @param x The hidden state variables
+#' @param y The observation variables
+#' @param nParticle The number of particles simulated
+#' @return The de-noised observations
 #' @examples
 #' x_true = sim_data(50,0.4,1.2)$x
 #' obs = sim_data(50,0.4,1.2)$y
 #' estimates_means = particleFilter(x_true,obs,1000)
 #' plot(x =1:50,y=estimates_means,type="l",col="red")
 #' lines(obs,col="blue")
-
-
-#############################################################
-# particle filter
-# sequential Monte Carlo with multinomial importance resampling (SIR)
-# one dimension
-
-# x - data of x dimension (1 * time)
-# y - data of y dimension (1 * time)
-# n - number of particles
-particleFilter = function(x,y,n)
+particleFilter = function(x,y,nParticle)
 {
   time = length(y)
-  estimates = matrix(NA, nrow =  n, ncol = time)
-  weights = matrix(NA, nrow =  n, ncol = time)
+  estimates = matrix(NA, nrow =  nParticle, ncol = time)
+  weights = matrix(NA, nrow =  nParticle, ncol = time)
 
-  sx = sqrt(var(x))
-  sy = sqrt(var(y))
+  noise = sqrt(var(x))
+  relation = sqrt(var(y))
 
   estimates[, 1] = y[1]
-  weights[, 1] = dnorm(y[1], estimates[, 1], sy)
+  weights[, 1] = dnorm(y[1], estimates[, 1], relation)
   weights[, 1] = weights[, 1]/sum(weights[, 1])
-  #print(weights[,1])
+
   estimates[, 1] = sample(estimates[, 1], replace = TRUE,
-                          size = n, prob = weights[, 1])
+                          size = nParticle, prob = weights[, 1])
 
   for (i in 2:time) {
-    estimates[, i] = rnorm(n, estimates[, i-1], sx)
-    weights[, i] = dnorm(y[i], estimates[, i], sy)
+    estimates[, i] = rnorm(nParticle, estimates[, i-1], noise)
+    weights[, i] = dnorm(y[i], estimates[, i], relation)
     weights[, i] = weights[, i]/sum(weights[, i])
 
     # resampling
     estimates[, i] = sample(estimates[, i], replace = TRUE,
-                            size = n, prob = weights[, i])
+                            size = nParticle, prob = weights[, i])
   }
 
   estimates_means = apply(estimates, 2, mean)

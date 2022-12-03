@@ -2,22 +2,24 @@
 % Please edit documentation in R/ParticleFilter.R
 \name{particleFilter}
 \alias{particleFilter}
-\title{Run the naive particle filter}
+\title{The particle filter
+(The sequential Monte Carlo with multinomial importance resampling (SIR))}
 \usage{
-particleFilter(x, y, n)
+particleFilter(x, y, nParticle)
 }
 \arguments{
-\item{x}{Distribution of random variable (fix to be more specific)}
+\item{x}{The hidden state variables}
 
-\item{y}{Observed data}
+\item{y}{The observation variables}
 
-\item{n}{Number of particles simulated}
+\item{nParticle}{The number of particles simulated}
 }
 \value{
-De-noised observations
+The de-noised observations
 }
 \description{
-Run the naive particle filter
+The particle filter
+(The sequential Monte Carlo with multinomial importance resampling (SIR))
 }
 \examples{
 x_true = sim_data(50,0.4,1.2)$x
