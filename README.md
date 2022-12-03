@@ -63,7 +63,20 @@ lines(as.vector(fm),col="black")
 
 Compared to `pfilter` in `library(pomp)` in efficiency;
 ```
+library(microbenchmark)
+microbenchmark(
+  particleFilter(data1[,3],data1[,2],1000),
+  pfilter(temp,Np=1000,filter.mean=TRUE)
+)
+```
 
+Predicting the results based on time series analysis;
+```
+set.seed(23102)
+temp = sim_data(50,0.4,1.2)
+
+particleFilterPredcit(temp$x,temp$y,100,filter = TRUE)
+particleFilterPredcit(temp$x,temp$y,100,filter = FALSE)
 ```
 
 More specific examples can be viewed at `browseVignettes("BayesPF")`.
