@@ -11,7 +11,7 @@
 #' estimates_means = particleFilter(x_true,obs,1000)
 #' plot(x =1:50,y=estimates_means,type="l",col="red")
 #' lines(obs,col="blue")
-particleFilter = function(x,y,nParticle)
+particleFilter = function(x, y, nParticle)
 {
   time = length(y)
   estimates = matrix(NA, nrow =  nParticle, ncol = time)
