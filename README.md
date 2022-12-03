@@ -47,7 +47,7 @@ particleFilter.Predcit(temp$x,temp$y,100,filter = FALSE)
 ```
 
 
-Compared to `pfilter` in `library(pomp)` in accuracy;
+Compared to `pfilter()` in `library(pomp)` for accuracy;
 ```
 library(pomp)
 temp = gompertz()
@@ -61,7 +61,7 @@ lines(as.vector(fm),col="black")
 ```
 
 
-Compared to `pfilter` in `library(pomp)` in efficiency;
+Compared to `pfilter()` in `library(pomp)` for efficiency;
 ```
 library(microbenchmark)
 microbenchmark(
