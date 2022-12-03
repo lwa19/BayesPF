@@ -9,18 +9,16 @@
 #' @return The prediction of observations
 #' @examples
 #' temp = sim_data(50,0.4,1.2)
-#' particleFilter.Predcit(temp$x,temp$y,100,filter = TRUE)
-#' particleFilter.Predcit(temp$x,temp$y,100,filter = FALSE)
+#' particleFilterPredict(temp$x,temp$y,100,filter = TRUE)
+#' particleFilterPredict(temp$x,temp$y,100,filter = FALSE)
 particleFilterPredict = function(x,y,nParticle,period=1,pred.n=10,filter=TRUE)
 {
-  library(forecast)
-
   if (filter == TRUE)
   {
     filter.mean = particleFilter(x,y,nParticle)
     ts = ts(filter.mean,frequency  = period)
     model = auto.arima(ts)
-    results = forecast(model, level=c(95), h=pred.times)
+    results = forecast(model, level=c(95), h=pred.n)
     plot(results)
     return(results)
   }
@@ -28,7 +26,7 @@ particleFilterPredict = function(x,y,nParticle,period=1,pred.n=10,filter=TRUE)
 
     ts = ts(y,frequency  = period)
     model = auto.arima(ts)
-    results = forecast(model, level=c(95), h=pred.times)
+    results = forecast(model, level=c(95), h=pred.n)
     plot(results)
     return(results)
   }

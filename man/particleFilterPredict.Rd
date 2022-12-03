@@ -27,6 +27,6 @@ particle filter prediction
 }
 \examples{
 temp = sim_data(50,0.4,1.2)
-particleFilter.Predcit(temp$x,temp$y,100,filter = TRUE)
-particleFilter.Predcit(temp$x,temp$y,100,filter = FALSE)
+particleFilterPredict(temp$x,temp$y,100,filter = TRUE)
+particleFilterPredict(temp$x,temp$y,100,filter = FALSE)
 }

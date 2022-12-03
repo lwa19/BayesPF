@@ -1,4 +1,3 @@
 exportPattern("^[[:alpha:]]+")
-import('pomp')
 import('forecast')
 importFrom("stats", "dnorm", "rnorm", "var")
