@@ -1,2 +1,3 @@
 exportPattern("^[[:alpha:]]+")
-importFrom("pomp", "forecast")
+import(pomp)
+import(forecast)
