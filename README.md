@@ -2,7 +2,7 @@
 Bayesian Particle Filter implemented in R
 
 ## Motivation
-The goal of making this package is to achieve the functionality of particle filter in R. The particle filter in this package is a simple Particle filter model based on Gaussian distribution. The particle filter could de-noise the observations in some specific pattern of the internal state variables x and partial observations y.
+The goal of making this package is to achieve the basic functionality of particle filter based on Gaussian distribution in R. The particle filter can be used to de-noise the observations in some specific pattern of the internal state variables x and partial observations y.
 
 ## Installation
 ```
