@@ -12,7 +12,7 @@ install.packages('devtools')
 devtools::install_github("lwa19/BayesPF", build_vignettes = T)
 library("BayesPF")
 ```
-There are three functions in `BayesPF` package which are `sim_data`, `particleFilter`, and `particleFilterPredict` functions. 
+There are four functions in `BayesPF` package which are `sim_data`,`sim_data_counts`, `particleFilter`, and `particleFilterPredict` functions. 
 
 ## Features
 The particle filter is designed for a hidden Markov Model, where the system made of both hidden and observable variables. The `BayesPF` is to achieve a basic functionality of particle filter. 
