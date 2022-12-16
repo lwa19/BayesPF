@@ -41,6 +41,24 @@ plot(x =1:50,y=estimates_means,type="l",col="red")
 lines(obs,col="blue")
 ```
 
+## Using `particleFilter()` to de-noise the observations of counts data y
+```{r}
+set.seed(1)
+temp = sim_data_counts(100, 1000, 0.2, 0.02)
+x_true = temp$x
+obs = temp$y
+estimates_means = particleFilter(x_true,obs,1000)
+plot(x =1:100,y=obs,type="l",col="blue", 
+     main = "particle filter on counts data", 
+     xlab = "time", ylab = "observation")
+lines(x_true, col = "black")
+lines(estimates_means, col="red")
+legend("topright", c("observed signals", "filtered signals", "true signals"), 
+       col = c("blue", "red", "black"), lty = 1)
+```
+
+
+
 
 ## Performance of `particleFilter()` vs. `pfilter()`
 ```{r n}
